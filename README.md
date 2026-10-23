@@ -37,13 +37,22 @@ API dapat diakses di `http://localhost:8000/api/products`.
 
 ## Endpoint
 
-| Method    | URL                  | Fungsi                       |
-|-----------|----------------------|------------------------------|
-| GET       | /api/products        | Daftar produk (10 per halaman) |
-| POST      | /api/products        | Tambah produk                |
-| GET       | /api/products/{id}   | Detail produk                |
-| PUT/PATCH | /api/products/{id}   | Ubah produk                  |
-| DELETE    | /api/products/{id}   | Hapus produk                 |
+| Method    | URL                | Auth | Fungsi                              |
+|-----------|--------------------|------|-------------------------------------|
+| POST      | /api/register      | -    | Daftar akun, mengembalikan token    |
+| POST      | /api/login         | -    | Login, mengembalikan token          |
+| GET       | /api/profile       | ✔    | Data user yang sedang login         |
+| POST      | /api/logout        | ✔    | Hapus token yang sedang dipakai     |
+| GET       | /api/products      | ✔    | Daftar produk (10 per halaman)      |
+| POST      | /api/products      | ✔    | Tambah produk                       |
+| GET       | /api/products/{id} | ✔    | Detail produk                       |
+| PUT/PATCH | /api/products/{id} | ✔    | Ubah produk                         |
+| DELETE    | /api/products/{id} | ✔    | Hapus produk                        |
+
+Endpoint bertanda ✔ butuh header `Authorization: Bearer <token>`.
+Token didapat dari response register atau login (`data.token`).
+Login dibatasi 5 percobaan per menit.
+Token berlaku 24 jam.
 
 Gunakan header `Accept: application/json` pada setiap request.
 Halaman berikutnya diakses dengan `?page=2`.
